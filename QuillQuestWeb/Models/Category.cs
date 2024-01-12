@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace QuillQuestWeb.Models
 {
@@ -6,7 +7,9 @@ namespace QuillQuestWeb.Models
     {
         [Key]
         public Guid Id { get; set; }
-        public required string Name { get; set; }
+		[DisplayName("Category Name")]
+		public required string Name { get; set; }
+        [DisplayName("Display Order")]
         public int DisplayOrder { get; set; }
     }
 }

@@ -17,10 +17,17 @@ namespace QuillQuestWeb.Controllers
             List<Category> categories = context.Categories.ToList();
             return View(categories);
         }
+		public IActionResult Create()
+		{
+			return View();
+		}
 
-        public IActionResult Create()
+        [HttpPost]
+		public IActionResult Create(Category category)
         {
-            return View();
+            context.Categories.Add(category);
+            context.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
