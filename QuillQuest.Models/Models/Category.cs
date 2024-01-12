@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace QuillQuestWeb.Models
+namespace QuillQuest.Models.Models
 {
     public class Category
     {

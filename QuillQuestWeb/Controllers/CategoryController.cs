@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using QuillQuestWeb.Data;
-using QuillQuestWeb.Models;
+using QuillQuest.DataAccess.Data;
+using QuillQuest.Models.Models;
 
 namespace QuillQuestWeb.Controllers
 {

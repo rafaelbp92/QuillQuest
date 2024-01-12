@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using QuillQuestWeb.Models;
+using QuillQuest.Models.Models;
 using System.Diagnostics;
 
 namespace QuillQuestWeb.Controllers

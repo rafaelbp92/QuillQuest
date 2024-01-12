@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using QuillQuestWeb.Data;
+using QuillQuest.DataAccess.Data;
 
 #nullable disable
 
-namespace QuillQuestWeb.Migrations
+namespace QuillQuest.DataAccess.Migrations
 {
     [DbContext(typeof(QuillQuestDbContext))]
     partial class QuillQuestDbContextModelSnapshot : ModelSnapshot

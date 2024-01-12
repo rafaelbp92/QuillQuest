@@ -1,4 +1,4 @@
-namespace QuillQuestWeb.Models
+namespace QuillQuest.Models.Models
 {
     public class ErrorViewModel
     {

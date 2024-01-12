@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using QuillQuestWeb.Data;
+using QuillQuest.DataAccess.Data;
 
 #nullable disable
 
-namespace QuillQuestWeb.Migrations
+namespace QuillQuest.DataAccess.Migrations
 {
     [DbContext(typeof(QuillQuestDbContext))]
     [Migration("20240112182151_SeedCategoryTable")]

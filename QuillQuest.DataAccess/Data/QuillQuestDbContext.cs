@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using QuillQuestWeb.Models;
+using QuillQuest.Models.Models;
 
-namespace QuillQuestWeb.Data
+namespace QuillQuest.DataAccess.Data
 {
     public class QuillQuestDbContext : DbContext
     {
