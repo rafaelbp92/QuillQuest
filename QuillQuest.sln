@@ -5,6 +5,12 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuillQuestWeb", "QuillQuestWeb\QuillQuestWeb.csproj", "{D633D04A-B8D3-4CCA-AD73-056E99AE7977}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuillQuest.DataAccess", "QuillQuest.DataAccess\QuillQuest.DataAccess.csproj", "{445725CC-305F-4FB1-A8C0-A06F354ED491}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuillQuest.Models", "QuillQuest.Models\QuillQuest.Models.csproj", "{E3450262-8992-4366-B4C6-958FE7F91BB3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuillQuest.Utilities", "QuillQuest.Utilities\QuillQuest.Utilities.csproj", "{53179A3C-82B1-4A09-BEB1-FC1D77FEDD40}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,18 @@ Global
 		{D633D04A-B8D3-4CCA-AD73-056E99AE7977}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D633D04A-B8D3-4CCA-AD73-056E99AE7977}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D633D04A-B8D3-4CCA-AD73-056E99AE7977}.Release|Any CPU.Build.0 = Release|Any CPU
+		{445725CC-305F-4FB1-A8C0-A06F354ED491}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{445725CC-305F-4FB1-A8C0-A06F354ED491}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{445725CC-305F-4FB1-A8C0-A06F354ED491}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{445725CC-305F-4FB1-A8C0-A06F354ED491}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3450262-8992-4366-B4C6-958FE7F91BB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3450262-8992-4366-B4C6-958FE7F91BB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3450262-8992-4366-B4C6-958FE7F91BB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3450262-8992-4366-B4C6-958FE7F91BB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53179A3C-82B1-4A09-BEB1-FC1D77FEDD40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53179A3C-82B1-4A09-BEB1-FC1D77FEDD40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53179A3C-82B1-4A09-BEB1-FC1D77FEDD40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53179A3C-82B1-4A09-BEB1-FC1D77FEDD40}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
