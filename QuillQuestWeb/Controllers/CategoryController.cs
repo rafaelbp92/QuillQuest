@@ -25,9 +25,14 @@ namespace QuillQuestWeb.Controllers
         [HttpPost]
 		public IActionResult Create(Category category)
         {
-            context.Categories.Add(category);
-            context.SaveChanges();
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+				context.Categories.Add(category);
+				context.SaveChanges();
+				return RedirectToAction("Index");
+			}
+            
+            return View();
         }
     }
 }
