@@ -29,6 +29,7 @@ namespace QuillQuestWeb.Controllers
             {
 				context.Categories.Add(category);
 				context.SaveChanges();
+				TempData["success"] = "Category created successfully";
 				return RedirectToAction("Index");
 			}
             
@@ -58,7 +59,8 @@ namespace QuillQuestWeb.Controllers
 			{
 				context.Categories.Update(category);
 				context.SaveChanges();
-				return RedirectToAction("Index");
+                TempData["success"] = "Category updated successfully";
+                return RedirectToAction("Index");
 			}
 
 			return View();
@@ -90,7 +92,8 @@ namespace QuillQuestWeb.Controllers
 			}
 			context.Categories.Remove(category);
 			context.SaveChanges();
-			return RedirectToAction("Index");
+            TempData["success"] = "Category deleted successfully";
+            return RedirectToAction("Index");
 		}
 	}
 }
