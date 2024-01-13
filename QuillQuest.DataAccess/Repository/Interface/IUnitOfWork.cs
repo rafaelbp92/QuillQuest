@@ -9,6 +9,7 @@ namespace QuillQuest.DataAccess.Repository.Interface
 	public interface IUnitOfWork
 	{
 		ICategoryRepository CategoryRepository { get; }
-		void Save();
+        IProductRepository ProductRepository { get; }
+        void Save();
 	}
 }

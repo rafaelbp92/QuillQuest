@@ -12,12 +12,15 @@ namespace QuillQuest.DataAccess.Repository
 	{
 		private readonly QuillQuestDbContext _dbContext;
 		public ICategoryRepository CategoryRepository { get; private set; }
+        public IProductRepository ProductRepository { get; private set; }
 
-		public UnitOfWork(QuillQuestDbContext context)
+        public UnitOfWork(QuillQuestDbContext context)
 		{
 			_dbContext = context;
 			CategoryRepository = new CategoryRepository(context);
-		}
+            ProductRepository = new ProductRepository(context);
+
+        }
 		
 
 		public void Save()
