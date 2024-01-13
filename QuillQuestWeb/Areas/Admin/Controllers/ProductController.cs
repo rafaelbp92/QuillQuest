@@ -10,64 +10,105 @@ namespace QuillQuestWeb.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _repository;
-        public ProductController(IUnitOfWork repository)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public ProductController(IUnitOfWork repository, IWebHostEnvironment webHostEnvironment)
         {
             _repository = repository;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public IActionResult Index()
         {
-            List<Product> products = _repository.ProductRepository.GetAll().ToList();
+            List<Product> products = _repository.ProductRepository.GetAll(includeProperties: "Category").ToList();
             return View(products);
         }
         public IActionResult Upsert(Guid? id)
         {
-			IEnumerable<SelectListItem> categories = _repository.CategoryRepository.GetAll().Select(c => new SelectListItem
-			{
-				Text = c.Name,
-				Value = c.Id.ToString()
-			});
+            IEnumerable<SelectListItem> categories = _repository.CategoryRepository.GetAll().Select(c => new SelectListItem
+            {
+                Text = c.Name,
+                Value = c.Id.ToString()
+            });
             ProductVM productVM = new()
             {
-                Product = new Product 
+                Product = new Product
                 {
                     Author = "",
                     Title = "",
                     ISBN = "",
-                    ImageUrl = "",
+                    ImageUrl = null,
                     ListPrice = 0,
-					Price = 0,
+                    Price = 0,
                     Price50 = 0,
-					Price100 = 0,
-				},
+                    Price100 = 0,
+                },
                 Categories = categories
             };
             if (id == null || id == Guid.Empty)
             {
+                //Create
                 return View(productVM);
-            } 
+            }
             else
             {
-				Product? product = _repository.ProductRepository.Get(c => c.Id == id);
+                //Update
+                Product? product = _repository.ProductRepository.Get(c => c.Id == id);
 
-				if (product == null)
-				{
-					return NotFound();
-				}
+                if (product == null)
+                {
+                    return NotFound();
+                }
                 productVM.Product = product;
-				return View(productVM);
-			}
-			
+                return View(productVM);
+            }
+
         }
 
         [HttpPost]
-        public IActionResult Upsert(Product product, IFormFile file)
+        public IActionResult Upsert(ProductVM productVM, IFormFile? file)
         {
             if (ModelState.IsValid)
             {
-                _repository.ProductRepository.Add(product);
-                TempData["success"] = "Product created successfully";
+                string wwwRootpath = _webHostEnvironment.WebRootPath;
+                string successMessage = "Product created successfully";
+
+                if (file != null)
+                {
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    string productPath = Path.Combine(wwwRootpath, @"images\product");
+
+                    if (!string.IsNullOrEmpty(productVM.Product.ImageUrl))
+                    {
+                        // Delete old image
+                        var oldImagePath = Path.Combine(wwwRootpath, productVM.Product.ImageUrl.TrimStart('\\'));
+                        if (System.IO.File.Exists(oldImagePath))
+                        {
+                            System.IO.File.Delete(oldImagePath);
+                        }
+                    }
+
+                    using (var fileStream = new FileStream(Path.Combine(productPath, fileName), FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
+
+                    productVM.Product.ImageUrl = @$"\images\product\{fileName}";
+                }
+
+                if (productVM.Product.Id == Guid.Empty)
+                {
+                    // Create
+                    _repository.ProductRepository.Add(productVM.Product);
+                }
+                else
+                {
+                    // Update
+                    _repository.ProductRepository.Update(productVM.Product);
+                    successMessage = "Product updated successfully";
+                }
+
                 _repository.Save();
+                TempData["success"] = successMessage;
                 return RedirectToAction("Index");
             }
 
@@ -103,32 +144,69 @@ namespace QuillQuestWeb.Areas.Admin.Controllers
         //    return View();
         //}
 
-        public IActionResult Delete(Guid? id)
+        //public IActionResult Delete(Guid? id)
+        //{
+        //    if (id == null || id == Guid.Empty)
+        //    {
+        //        return NotFound();
+        //    }
+        //    Product? product = _repository.ProductRepository.Get(c => c.Id == id);
+        //    if (product == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return View(product);
+        //}
+
+        //[HttpPost, ActionName("Delete")]
+        //public IActionResult DeletePost(Guid? id)
+        //{
+        //    Product? product = _repository.ProductRepository.Get(c => c.Id == id);
+        //    if (product == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    _repository.ProductRepository.Remove(product);
+        //    _repository.Save();
+        //    TempData["success"] = "Product deleted successfully";
+        //    return RedirectToAction("Index");
+        //}
+
+        #region API Calls
+
+        [HttpGet]
+        public IActionResult GetAll()
         {
-            if (id == null || id == Guid.Empty)
-            {
-                return NotFound();
-            }
-            Product? product = _repository.ProductRepository.Get(c => c.Id == id);
-            if (product == null)
-            {
-                return NotFound();
-            }
-            return View(product);
+            List<Product> products = _repository.ProductRepository.GetAll(includeProperties: "Category").ToList();
+            return Json(new { data = products });
         }
 
-        [HttpPost, ActionName("Delete")]
-        public IActionResult DeletePost(Guid? id)
+        [HttpDelete]
+        public IActionResult Delete(Guid? id)
         {
-            Product? product = _repository.ProductRepository.Get(c => c.Id == id);
-            if (product == null)
+            Product productDelete = _repository.ProductRepository.Get(p => p.Id == id);
+            if (productDelete == null)
             {
-                return NotFound();
+                return Json(new { success = false, message = "Error while deleting" });
             }
-            _repository.ProductRepository.Remove(product);
-            _repository.Save();
-            TempData["success"] = "Product deleted successfully";
-            return RedirectToAction("Index");
-        }
+
+			if (!string.IsNullOrEmpty(productDelete.ImageUrl))
+            {
+				string wwwRootpath = _webHostEnvironment.WebRootPath;
+				// Delete old image
+				var oldImagePath = Path.Combine(wwwRootpath, productDelete.ImageUrl.TrimStart('\\'));
+				if (System.IO.File.Exists(oldImagePath))
+				{
+					System.IO.File.Delete(oldImagePath);
+				}
+			}
+
+			_repository.ProductRepository.Remove(productDelete);
+			_repository.Save();
+            return Json(new { success = true, message = "Product deleted successfully" });
+
+		}
+
+        #endregion
     }
 }
