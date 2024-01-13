@@ -1,20 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using QuillQuest.DataAccess.Data;
+using QuillQuest.DataAccess.Repository.Interface;
 using QuillQuest.Models.Models;
 
 namespace QuillQuestWeb.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly QuillQuestDbContext context;
-        public CategoryController(QuillQuestDbContext _context)
+        private readonly ICategoryRepository _repository;
+        public CategoryController(ICategoryRepository repository)
         {
-            context = _context;
+			_repository = repository;
         }
 
         public IActionResult Index()
         {
-            List<Category> categories = context.Categories.ToList();
+            List<Category> categories = _repository.GetAll().ToList();
             return View(categories);
         }
 		public IActionResult Create()
@@ -27,8 +27,7 @@ namespace QuillQuestWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-				context.Categories.Add(category);
-				context.SaveChanges();
+				_repository.Add(category);
 				TempData["success"] = "Category created successfully";
 				return RedirectToAction("Index");
 			}
@@ -42,7 +41,7 @@ namespace QuillQuestWeb.Controllers
 			{
 				return NotFound();
 			}
-			Category? category = context.Categories.Find(id);
+			Category? category = _repository.Get(c => c.Id == id);
 			//Category? category = context.Categories.FirstOrDefault(c => c.Id == id);
 			//Category? category = context.Categories.Where(c => c.Id == id).FirstOrDefault();
 			if (category == null)
@@ -57,8 +56,7 @@ namespace QuillQuestWeb.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				context.Categories.Update(category);
-				context.SaveChanges();
+				_repository.Update(category);
                 TempData["success"] = "Category updated successfully";
                 return RedirectToAction("Index");
 			}
@@ -72,7 +70,7 @@ namespace QuillQuestWeb.Controllers
 			{
 				return NotFound();
 			}
-			Category? category = context.Categories.Find(id);
+			Category? category = _repository.Get(c => c.Id == id);
 			//Category? category = context.Categories.FirstOrDefault(c => c.Id == id);
 			//Category? category = context.Categories.Where(c => c.Id == id).FirstOrDefault();
 			if (category == null)
@@ -85,13 +83,12 @@ namespace QuillQuestWeb.Controllers
 		[HttpPost, ActionName("Delete")]
 		public IActionResult DeletePost(Guid? id)
 		{
-			Category? category = context.Categories.Find(id);
+			Category? category = _repository.Get(c => c.Id == id);
 			if (category == null)
 			{
 				return NotFound();
 			}
-			context.Categories.Remove(category);
-			context.SaveChanges();
+			_repository.Remove(category);
             TempData["success"] = "Category deleted successfully";
             return RedirectToAction("Index");
 		}
