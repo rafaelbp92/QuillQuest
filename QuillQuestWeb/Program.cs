@@ -15,6 +15,8 @@ builder.Services.AddDbContext<QuillQuestDbContext>(options =>
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<QuillQuestDbContext>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+builder.Services.AddRazorPages(); // Required for Identity pages because they use Razor pages
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -33,6 +35,8 @@ app.UseRouting();
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+app.MapRazorPages(); // Required for Identity pages because they use Razor pages
 
 app.MapControllerRoute(
     name: "default",
