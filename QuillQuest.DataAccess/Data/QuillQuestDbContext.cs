@@ -16,9 +16,9 @@ namespace QuillQuest.DataAccess.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Category>().HasData(
-                    new Category { Id = Guid.NewGuid(), Name= "Action", DisplayOrder = 1 },
-                    new Category { Id = Guid.NewGuid(), Name = "SciFi", DisplayOrder = 2 },
-                    new Category { Id = Guid.NewGuid(), Name = "History", DisplayOrder = 3 }
+                    new Category { Id = Guid.Parse("FC591A53-7E51-4C33-B6F4-278DE977DD9C"), Name= "Action", DisplayOrder = 1 },
+                    new Category { Id = Guid.Parse("9FA92E4C-D942-4F76-9B0D-7F8334791723"), Name = "SciFi", DisplayOrder = 2 },
+                    new Category { Id = Guid.Parse("F7B462A5-8581-4B90-B009-05C316F0E691"), Name = "History", DisplayOrder = 3 }
                 );
 
             modelBuilder.Entity<Product>().HasData(
@@ -32,7 +32,9 @@ namespace QuillQuest.DataAccess.Data
                         ListPrice = 99,
                         Price = 90,
                         Price50 = 85,
-                        Price100 = 80
+                        Price100 = 80,
+                        CategoryId = Guid.Parse("FC591A53-7E51-4C33-B6F4-278DE977DD9C"),
+                        ImageUrl = ""
                     },
                     new Product
                     {
@@ -44,8 +46,10 @@ namespace QuillQuest.DataAccess.Data
                         ListPrice = 40,
                         Price = 30,
                         Price50 = 25,
-                        Price100 = 20
-                    },
+                        Price100 = 20,
+						CategoryId = Guid.Parse("9FA92E4C-D942-4F76-9B0D-7F8334791723"),
+						ImageUrl = ""
+					},
                     new Product
                     {
                         Id = Guid.NewGuid(),
@@ -56,8 +60,10 @@ namespace QuillQuest.DataAccess.Data
                         ListPrice = 55,
                         Price = 50,
                         Price50 = 40,
-                        Price100 = 35
-                    },
+                        Price100 = 35,
+						CategoryId = Guid.Parse("FC591A53-7E51-4C33-B6F4-278DE977DD9C"),
+						ImageUrl = ""
+					},
                     new Product
                     {
                         Id = Guid.NewGuid(),
@@ -68,8 +74,10 @@ namespace QuillQuest.DataAccess.Data
                         ListPrice = 70,
                         Price = 65,
                         Price50 = 60,
-                        Price100 = 55
-                    },
+                        Price100 = 55,
+						CategoryId = Guid.Parse("9FA92E4C-D942-4F76-9B0D-7F8334791723"),
+						ImageUrl = ""
+					},
                     new Product
                     {
                         Id = Guid.NewGuid(),
@@ -80,8 +88,10 @@ namespace QuillQuest.DataAccess.Data
                         ListPrice = 30,
                         Price = 27,
                         Price50 = 25,
-                        Price100 = 20
-                    },
+                        Price100 = 20,
+						CategoryId = Guid.Parse("F7B462A5-8581-4B90-B009-05C316F0E691"),
+						ImageUrl = ""
+					},
                     new Product
                     {
                         Id = Guid.NewGuid(),
@@ -92,8 +102,10 @@ namespace QuillQuest.DataAccess.Data
                         ListPrice = 25,
                         Price = 23,
                         Price50 = 22,
-                        Price100 = 20
-                    }
+                        Price100 = 20,
+						CategoryId = Guid.Parse("9FA92E4C-D942-4F76-9B0D-7F8334791723"),
+						ImageUrl = ""
+					}
                 );
         }
     }

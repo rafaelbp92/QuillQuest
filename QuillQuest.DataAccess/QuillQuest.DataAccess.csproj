@@ -20,4 +20,8 @@
     <ProjectReference Include="..\QuillQuest.Utilities\QuillQuest.Utilities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

@@ -12,8 +12,8 @@ using QuillQuest.DataAccess.Data;
 namespace QuillQuest.DataAccess.Migrations
 {
     [DbContext(typeof(QuillQuestDbContext))]
-    [Migration("20240113112214_AddProductsTable")]
-    partial class AddProductsTable
+    [Migration("20240113132836_AddCategoryAndProductTablesWithData")]
+    partial class AddCategoryAndProductTablesWithData
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,7 +47,7 @@ namespace QuillQuest.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("f7b462a5-8581-4b90-b009-05c316f0e691"),
+                            Id = new Guid("fc591a53-7e51-4c33-b6f4-278de977dd9c"),
                             DisplayOrder = 1,
                             Name = "Action"
                         },
@@ -59,7 +59,7 @@ namespace QuillQuest.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = new Guid("fc591a53-7e51-4c33-b6f4-278de977dd9c"),
+                            Id = new Guid("f7b462a5-8581-4b90-b009-05c316f0e691"),
                             DisplayOrder = 3,
                             Name = "History"
                         });
@@ -74,6 +74,9 @@ namespace QuillQuest.DataAccess.Migrations
                     b.Property<string>("Author")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -101,13 +104,16 @@ namespace QuillQuest.DataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("Products");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("36a8ca75-4d2a-4b17-8930-c8913550a48d"),
+                            Id = new Guid("538bed56-e80b-4696-b04d-7dfe0ee599e7"),
                             Author = "Billy Spark",
+                            CategoryId = new Guid("fc591a53-7e51-4c33-b6f4-278de977dd9c"),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                             ISBN = "SWD9999001",
                             ListPrice = 99.0,
@@ -118,8 +124,9 @@ namespace QuillQuest.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = new Guid("0ba616ef-a8aa-4a65-95db-ab0b8d5535ba"),
+                            Id = new Guid("77c62ec3-fa9f-4b2c-b07d-fbcc46061e5d"),
                             Author = "Nancy Hoover",
+                            CategoryId = new Guid("9fa92e4c-d942-4f76-9b0d-7f8334791723"),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                             ISBN = "CAW777777701",
                             ListPrice = 40.0,
@@ -130,8 +137,9 @@ namespace QuillQuest.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d7006cd4-de33-4f15-aec9-01024ce4f575"),
+                            Id = new Guid("dfd85113-8a39-4e96-87ad-e7aed3f3f1e1"),
                             Author = "Julian Button",
+                            CategoryId = new Guid("fc591a53-7e51-4c33-b6f4-278de977dd9c"),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                             ISBN = "RITO5555501",
                             ListPrice = 55.0,
@@ -142,8 +150,9 @@ namespace QuillQuest.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = new Guid("61a6cbfd-321c-41e7-a141-330a34058e16"),
+                            Id = new Guid("569410e6-991a-4e0d-9c08-508b25e953c4"),
                             Author = "Abby Muscles",
+                            CategoryId = new Guid("9fa92e4c-d942-4f76-9b0d-7f8334791723"),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                             ISBN = "WS3333333301",
                             ListPrice = 70.0,
@@ -154,8 +163,9 @@ namespace QuillQuest.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = new Guid("cf222333-d876-4a39-895e-aab9c9e3f5e4"),
+                            Id = new Guid("710c3238-7424-4796-819e-1bddc87b5a2b"),
                             Author = "Ron Parker",
+                            CategoryId = new Guid("f7b462a5-8581-4b90-b009-05c316f0e691"),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                             ISBN = "SOTJ1111111101",
                             ListPrice = 30.0,
@@ -166,8 +176,9 @@ namespace QuillQuest.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ec292c17-daf6-4366-aef4-019dd884162e"),
+                            Id = new Guid("a2f3bd71-2040-4d0b-b391-d976dc28a941"),
                             Author = "Laura Phantom",
+                            CategoryId = new Guid("9fa92e4c-d942-4f76-9b0d-7f8334791723"),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                             ISBN = "FOT000000001",
                             ListPrice = 25.0,
@@ -176,6 +187,17 @@ namespace QuillQuest.DataAccess.Migrations
                             Price50 = 22.0,
                             Title = "Leaves and Wonders"
                         });
+                });
+
+            modelBuilder.Entity("QuillQuest.Models.Models.Product", b =>
+                {
+                    b.HasOne("QuillQuest.Models.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
                 });
 #pragma warning restore 612, 618
         }
