@@ -4,6 +4,7 @@ using QuillQuest.DataAccess.Repository.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace QuillQuest.DataAccess.Repository
@@ -24,11 +25,10 @@ namespace QuillQuest.DataAccess.Repository
 			dbSet.Add(entity);
 		}
 
-		public T Get(System.Linq.Expressions.Expression<Func<T, bool>> filter)
+		public T Get(Expression<Func<T, bool>> filter)
 		{
 			IQueryable<T> query = dbSet;
-			query.Where(filter);
-			return query.FirstOrDefault();
+			return query.FirstOrDefault(filter);
 		}
 
 		public IEnumerable<T> GetAll()
