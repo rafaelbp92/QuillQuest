@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using QuillQuest.Models.Models;
 
 namespace QuillQuest.DataAccess.Data
 {
-    public class QuillQuestDbContext : DbContext
+    public class QuillQuestDbContext : IdentityDbContext
     {
         public QuillQuestDbContext(DbContextOptions<QuillQuestDbContext> options) : base(options)
         {
@@ -15,6 +16,8 @@ namespace QuillQuest.DataAccess.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Category>().HasData(
                     new Category { Id = Guid.Parse("FC591A53-7E51-4C33-B6F4-278DE977DD9C"), Name= "Action", DisplayOrder = 1 },
                     new Category { Id = Guid.Parse("9FA92E4C-D942-4F76-9B0D-7F8334791723"), Name = "SciFi", DisplayOrder = 2 },
