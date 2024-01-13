@@ -23,4 +23,8 @@
     <ProjectReference Include="..\QuillQuest.Utilities\QuillQuest.Utilities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
 </Project>

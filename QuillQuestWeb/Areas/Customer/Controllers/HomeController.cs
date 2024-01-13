@@ -2,8 +2,10 @@ using Microsoft.AspNetCore.Mvc;
 using QuillQuest.Models.Models;
 using System.Diagnostics;
 
-namespace QuillQuestWeb.Controllers
+namespace QuillQuestWeb.Areas.Customer.Controllers
 {
+
+    [Area("Customer")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
