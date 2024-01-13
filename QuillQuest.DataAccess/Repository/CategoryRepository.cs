@@ -20,11 +20,6 @@ namespace QuillQuest.DataAccess.Repository
 			_dbContext = context;
 		}
 
-		public void Save()
-		{
-			_dbContext.SaveChanges();
-		}
-
 		public void Update(Category category)
 		{
 			_dbContext.Categories.Update(category);
