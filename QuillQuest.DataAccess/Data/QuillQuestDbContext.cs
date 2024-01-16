@@ -25,6 +25,39 @@ namespace QuillQuest.DataAccess.Data
                     new Category { Id = Guid.Parse("F7B462A5-8581-4B90-B009-05C316F0E691"), Name = "History", DisplayOrder = 3 }
                 );
 
+            modelBuilder.Entity<Company>().HasData(
+                new Company
+                {
+                    Id = Guid.Parse("72b1d6c1-cd17-4299-a700-db1ec9c60f3a"),
+                    Name = "Tech Solution",
+                    StreetAddress = "123 Tech St",
+                    City = "Tech City",
+                    PostalCode = "12121",
+                    State = "IL",
+                    PhoneNumber = "6669990000"
+                },
+                new Company
+                {
+                    Id = Guid.Parse("60812648-064a-4bff-94cd-de5ac60de991"),
+                    Name = "Vivid Books",
+                    StreetAddress = "999 Vid St",
+                    City = "Vid City",
+                    PostalCode = "66666",
+                    State = "IL",
+                    PhoneNumber = "7779990000"
+                },
+                new Company
+                {
+                    Id = Guid.Parse("40df0e0d-5e64-4051-990b-60d5a9718ce7"),
+                    Name = "Readers Club",
+                    StreetAddress = "999 Main St",
+                    City = "Lala land",
+                    PostalCode = "99999",
+                    State = "NY",
+                    PhoneNumber = "1113335555"
+                }
+                );
+
             modelBuilder.Entity<Product>().HasData(
                     new Product
                     {
@@ -38,7 +71,7 @@ namespace QuillQuest.DataAccess.Data
                         Price50 = 85,
                         Price100 = 80,
                         CategoryId = Guid.Parse("FC591A53-7E51-4C33-B6F4-278DE977DD9C"),
-                        ImageUrl = ""
+                        ImageUrl = "\\images\\product\\333ef4f7-fcff-405e-b1c9-12b93f761af4.jpg"
                     },
                     new Product
                     {
@@ -52,8 +85,8 @@ namespace QuillQuest.DataAccess.Data
                         Price50 = 25,
                         Price100 = 20,
 						CategoryId = Guid.Parse("9FA92E4C-D942-4F76-9B0D-7F8334791723"),
-						ImageUrl = ""
-					},
+						ImageUrl = "\\images\\product\\9c3c9229-e77b-49d3-9178-745b2650f41d.jpg"
+                    },
                     new Product
                     {
                         Id = Guid.NewGuid(),
@@ -66,8 +99,8 @@ namespace QuillQuest.DataAccess.Data
                         Price50 = 40,
                         Price100 = 35,
 						CategoryId = Guid.Parse("FC591A53-7E51-4C33-B6F4-278DE977DD9C"),
-						ImageUrl = ""
-					},
+						ImageUrl = "\\images\\product\\966885ea-fa5c-4d4c-8d1b-717d49bf2abe.jpg"
+                    },
                     new Product
                     {
                         Id = Guid.NewGuid(),
@@ -80,8 +113,8 @@ namespace QuillQuest.DataAccess.Data
                         Price50 = 60,
                         Price100 = 55,
 						CategoryId = Guid.Parse("9FA92E4C-D942-4F76-9B0D-7F8334791723"),
-						ImageUrl = ""
-					},
+						ImageUrl = "\\images\\product\\08291c8d-90d6-407f-a7d2-8f5f10f0eee4.jpg"
+                    },
                     new Product
                     {
                         Id = Guid.NewGuid(),
@@ -94,8 +127,8 @@ namespace QuillQuest.DataAccess.Data
                         Price50 = 25,
                         Price100 = 20,
 						CategoryId = Guid.Parse("F7B462A5-8581-4B90-B009-05C316F0E691"),
-						ImageUrl = ""
-					},
+						ImageUrl = "\\images\\product\\d995464f-3e24-4283-bb74-d52c9f7fa470.jpg"
+                    },
                     new Product
                     {
                         Id = Guid.NewGuid(),
@@ -108,8 +141,8 @@ namespace QuillQuest.DataAccess.Data
                         Price50 = 22,
                         Price100 = 20,
 						CategoryId = Guid.Parse("9FA92E4C-D942-4F76-9B0D-7F8334791723"),
-						ImageUrl = ""
-					}
+						ImageUrl = "\\images\\product\\fd9fcccf-75ad-4305-960f-9e776c080d3c.jpg"
+                    }
                 );
         }
     }

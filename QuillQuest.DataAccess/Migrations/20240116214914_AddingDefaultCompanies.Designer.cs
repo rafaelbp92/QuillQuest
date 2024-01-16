@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QuillQuest.DataAccess.Data;
 
@@ -11,9 +12,11 @@ using QuillQuest.DataAccess.Data;
 namespace QuillQuest.DataAccess.Migrations
 {
     [DbContext(typeof(QuillQuestDbContext))]
-    partial class QuillQuestDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240116214914_AddingDefaultCompanies")]
+    partial class AddingDefaultCompanies
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
