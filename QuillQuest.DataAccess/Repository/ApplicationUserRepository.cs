@@ -5,18 +5,18 @@ using QuillQuest.Models.Models;
 
 namespace QuillQuest.DataAccess.Repository
 {
-	public class ApplicationUserRepository : Repository<ApplicationUser>, IApplicationUserRepository
+	public class CategoryRepository : Repository<Category>, ICategoryRepository
 	{
 		private readonly QuillQuestDbContext _dbContext;
 
-		public ApplicationUserRepository(QuillQuestDbContext context) : base(context) 
+		public CategoryRepository(QuillQuestDbContext context) : base(context) 
 		{
 			_dbContext = context;
 		}
 
-		public void Update(ApplicationUser user)
+		public void Update(Category category)
 		{
-			_dbContext.ApplicationUsers.Update(user);
+			_dbContext.Categories.Update(category);
 		}
 	}
 }
