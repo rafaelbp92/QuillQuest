@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QuillQuest.DataAccess.Data;
 
@@ -11,9 +12,11 @@ using QuillQuest.DataAccess.Data;
 namespace QuillQuest.DataAccess.Migrations
 {
     [DbContext(typeof(QuillQuestDbContext))]
-    partial class QuillQuestDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240116204953_AddCompanyTable")]
+    partial class AddCompanyTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -267,6 +270,7 @@ namespace QuillQuest.DataAccess.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("City")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -274,15 +278,19 @@ namespace QuillQuest.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PostalCode")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("State")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StreetAddress")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -339,7 +347,7 @@ namespace QuillQuest.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("dc7caed9-0c36-4ef7-b01a-43c179aee5c9"),
+                            Id = new Guid("37aa9efc-b0bd-4d0d-b814-73b1cef6722a"),
                             Author = "Billy Spark",
                             CategoryId = new Guid("fc591a53-7e51-4c33-b6f4-278de977dd9c"),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
@@ -353,7 +361,7 @@ namespace QuillQuest.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = new Guid("fc535e82-1666-4dff-9c8d-e15a4e7a1a82"),
+                            Id = new Guid("e4628fb5-1f84-4f5c-9405-c66effa756b5"),
                             Author = "Nancy Hoover",
                             CategoryId = new Guid("9fa92e4c-d942-4f76-9b0d-7f8334791723"),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
@@ -367,7 +375,7 @@ namespace QuillQuest.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ac354ac2-0422-4533-b0de-95b72e40f083"),
+                            Id = new Guid("a647e522-8f84-4263-ab76-be317766471c"),
                             Author = "Julian Button",
                             CategoryId = new Guid("fc591a53-7e51-4c33-b6f4-278de977dd9c"),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
@@ -381,7 +389,7 @@ namespace QuillQuest.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6c70cbfa-38f4-49b2-8ea9-74256cbfc134"),
+                            Id = new Guid("7b3bbe85-dfa0-4a9e-9725-7769e2162e3c"),
                             Author = "Abby Muscles",
                             CategoryId = new Guid("9fa92e4c-d942-4f76-9b0d-7f8334791723"),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
@@ -395,7 +403,7 @@ namespace QuillQuest.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ef1e5d3c-d229-483f-aaab-0a6612279ae2"),
+                            Id = new Guid("8c19d8f1-d49a-40cc-9615-d3139abded83"),
                             Author = "Ron Parker",
                             CategoryId = new Guid("f7b462a5-8581-4b90-b009-05c316f0e691"),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
@@ -409,7 +417,7 @@ namespace QuillQuest.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = new Guid("9afb8f0c-22ce-4644-9e73-aaace2a762cf"),
+                            Id = new Guid("5c9fec6f-5f0f-4781-8b8a-76118d745d0b"),
                             Author = "Laura Phantom",
                             CategoryId = new Guid("9fa92e4c-d942-4f76-9b0d-7f8334791723"),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",

@@ -10,6 +10,7 @@ namespace QuillQuest.DataAccess.Repository.Interface
 	{
 		ICategoryRepository CategoryRepository { get; }
         IProductRepository ProductRepository { get; }
+        ICompanyRepository CompanyRepository { get; }
         void Save();
 	}
 }
