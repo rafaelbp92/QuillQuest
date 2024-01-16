@@ -1,7 +1,9 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using QuillQuest.DataAccess.Repository.Interface;
 using QuillQuest.Models.Models;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace QuillQuestWeb.Areas.Customer.Controllers
 {
@@ -26,8 +28,23 @@ namespace QuillQuestWeb.Areas.Customer.Controllers
 
         public IActionResult Details(Guid? id)
         {
+            ShoppingCart cart = new ShoppingCart();
             Product product = _unitOfWork.ProductRepository.Get(p => p.Id == id, includeProperties: "Category");
-            return View(product);
+            cart.Product = product;
+            cart.ProductId = product.Id;
+            return View(cart);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult Details(ShoppingCart cart)
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            cart.ApplicationUserId = userId;
+            _unitOfWork.ShoppingCartRepository.Add(cart);
+            _unitOfWork.Save();
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Privacy()
