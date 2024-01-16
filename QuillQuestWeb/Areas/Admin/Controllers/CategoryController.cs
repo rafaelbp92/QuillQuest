@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using QuillQuest.DataAccess.Repository.Interface;
 using QuillQuest.Models.Models;
+using QuillQuest.Utilities;
 
 namespace QuillQuestWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles  = SD.Role_Admin)]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _repository;

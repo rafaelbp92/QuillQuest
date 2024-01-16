@@ -3,6 +3,8 @@ using QuillQuest.DataAccess.Data;
 using QuillQuest.DataAccess.Repository;
 using QuillQuest.DataAccess.Repository.Interface;
 using Microsoft.AspNetCore.Identity;
+using QuillQuest.Utilities;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,8 +14,19 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<QuillQuestDbContext>(options => 
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<QuillQuestDbContext>();
+
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<QuillQuestDbContext>()
+    .AddDefaultTokenProviders();
+// This configurations has to be after add indentity
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = $"/Identity/Account/Login";
+    options.LogoutPath = $"/Identity/Account/Logout";
+    options.AccessDeniedPath = $"/Indentity/Account/AccessDenied";
+});
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 builder.Services.AddRazorPages(); // Required for Identity pages because they use Razor pages
 

@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using QuillQuest.DataAccess.Repository.Interface;
 using QuillQuest.Models.Models;
 using QuillQuest.Models.ViewModels;
+using QuillQuest.Utilities;
 
 namespace QuillQuestWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _repository;
