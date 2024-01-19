@@ -25,9 +25,17 @@ namespace QuillQuest.DataAccess.Repository
 			dbSet.Add(entity);
 		}
 
-		public T Get(Expression<Func<T, bool>> filter, string? includeProperties = null)
+		public T Get(Expression<Func<T, bool>> filter, string? includeProperties = null, bool tracked = true)
 		{
-			IQueryable<T> query = dbSet;
+			IQueryable<T> query;
+			if (tracked)
+			{
+				query = dbSet;
+			}
+			else
+			{
+				query = dbSet.AsNoTracking();
+			}
 			if (!string.IsNullOrEmpty(includeProperties))
 			{
 				foreach (var prop in includeProperties.Split(',', StringSplitOptions.RemoveEmptyEntries))
@@ -38,9 +46,13 @@ namespace QuillQuest.DataAccess.Repository
 			return query.FirstOrDefault(filter);
 		}
 
-		public IEnumerable<T> GetAll(string? includeProperties = null)
+		public IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter = null, string? includeProperties = null)
 		{
 			IQueryable<T> query = dbSet;
+			if (filter != null)
+			{
+				query.Where(filter);
+			}
 			if (!string.IsNullOrEmpty(includeProperties))
 			{
 				foreach(var prop in includeProperties.Split(',', StringSplitOptions.RemoveEmptyEntries))

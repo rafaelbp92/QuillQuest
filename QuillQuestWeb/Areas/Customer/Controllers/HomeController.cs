@@ -42,7 +42,24 @@ namespace QuillQuestWeb.Areas.Customer.Controllers
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
             cart.ApplicationUserId = userId;
-            _unitOfWork.ShoppingCartRepository.Add(cart);
+
+            ShoppingCart cartDb = _unitOfWork.ShoppingCartRepository.Get(c => c.ApplicationUserId == userId &&
+                c.ProductId == cart.ProductId, tracked: false);
+
+            if (cartDb != null)
+            {
+                // Update cart
+                cartDb.Count += cart.Count;
+                _unitOfWork.ShoppingCartRepository.Update(cartDb);
+            }
+            else
+            {
+                // Add cart
+                _unitOfWork.ShoppingCartRepository.Add(cart);
+            }
+
+            TempData["sucess"] = "Cart updated sucessfully";
+           
             _unitOfWork.Save();
             return RedirectToAction(nameof(Index));
         }
