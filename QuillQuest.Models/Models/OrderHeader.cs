@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using QuillQuest.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -20,8 +22,8 @@ namespace QuillQuest.Models.Models
         public DateTime ShippingDate { get; set; }
         public double OrderTotal { get; set; }
 
-        public string? OrderStatus { get; set; }
-        public string? PaymentStatus { get; set; }
+        public OrderStatusEnum? OrderStatus { get; set; }
+        public PaymentStatusEnum? PaymentStatus { get; set; }
         public string? TrackingNumber { get; set; }
         public string? Carrier { get; set; }
 
@@ -30,14 +32,21 @@ namespace QuillQuest.Models.Models
 
         public string? PaymentIntentId { get; set; }
 
-        public required string Name { get; set; }
+        [Required]
+        public string Name { get; set; }
+        [Required]
         [DisplayName("Street Address")]
-        public required string StreetAddress { get; set; }
-        public required string City { get; set; }
-        public required string State { get; set; }
+        public string StreetAddress { get; set; }
+        [Required]
+        public string City { get; set; }
+        [Required]
+        public string State { get; set; }
+        [Required]
         [DisplayName("Postal Code")]
-        public required string PostalCode { get; set; }
+        public string PostalCode { get; set; }
+        [Required]
         [DisplayName("Phone Number")]
-        public required string PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
+
     }
 }

@@ -25,12 +25,13 @@ namespace QuillQuestWeb.Areas.Customer.Controllers
             ShoppingCartVM shoppingCartVm = new()
             {
                 ShoppingCarts = carts,
+                OrderHeader = new()
             };
 
             foreach (var cart in carts)
             {
                 cart.Price = OrderTotalCalculator.GetPriceBasedOnQuantity(cart);
-                shoppingCartVm.OrderTotal += (cart.Price * cart.Count);
+                shoppingCartVm.OrderHeader.OrderTotal += (cart.Price * cart.Count);
 
             }
             return View(shoppingCartVm);
@@ -38,7 +39,32 @@ namespace QuillQuestWeb.Areas.Customer.Controllers
 
         public IActionResult Summary()
         {
-            return View();
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var carts = _unitOfWork.ShoppingCartRepository.GetAll(c => c.ApplicationUserId == userId, includeProperties: "Product");
+
+            ShoppingCartVM shoppingCartVm = new()
+            {
+                ShoppingCarts = carts,
+                OrderHeader = new()
+            };
+
+            shoppingCartVm.OrderHeader.ApplicationUser = _unitOfWork.ApplicationUserRepository.Get(u => u.Id == userId);
+
+            shoppingCartVm.OrderHeader.Name = shoppingCartVm.OrderHeader.ApplicationUser.Name;
+            shoppingCartVm.OrderHeader.PhoneNumber = shoppingCartVm.OrderHeader.ApplicationUser.PhoneNumber;
+            shoppingCartVm.OrderHeader.StreetAddress = shoppingCartVm.OrderHeader.ApplicationUser.StreetAddress;
+            shoppingCartVm.OrderHeader.City = shoppingCartVm.OrderHeader.ApplicationUser.City;
+            shoppingCartVm.OrderHeader.State = shoppingCartVm.OrderHeader.ApplicationUser.State;
+            shoppingCartVm.OrderHeader.PostalCode = shoppingCartVm.OrderHeader.ApplicationUser.PostalCode;
+
+            foreach (var cart in carts)
+            {
+                cart.Price = OrderTotalCalculator.GetPriceBasedOnQuantity(cart);
+                shoppingCartVm.OrderHeader.OrderTotal += (cart.Price * cart.Count);
+
+            }
+            return View(shoppingCartVm);
         }
 
         public IActionResult Plus(Guid cartId)
