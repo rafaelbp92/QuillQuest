@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace QuillQuest.DataAccess.Repository
 {
-    public class OrderheaderRepository : Repository<OrderHeader>, IOrderHeaderRepository
+    public class OrderDetailRepository : Repository<OrderDetail>, IOrderDetailRepository
     {
         private readonly QuillQuestDbContext _dbContext;
 
-        public OrderheaderRepository(QuillQuestDbContext context) : base(context)
+        public OrderDetailRepository(QuillQuestDbContext context) : base(context)
         {
             _dbContext = context;
         }
 
-        public void Update(OrderHeader orderHeader)
+        public void Update(OrderDetail orderDetail)
         {
-            _dbContext.OrderHeaders.Update(orderHeader);
+            _dbContext.OrderDetails.Update(orderDetail);
         }
     }
 }

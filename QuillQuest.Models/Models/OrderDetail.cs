@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace QuillQuest.Models.Models
 {
-    public class OrderDetails
+    public class OrderDetail
     {
         public Guid Id { get; set; }
         public required Guid OrderHeaderId { get; set; }
