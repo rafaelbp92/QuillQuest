@@ -1,5 +1,6 @@
 ﻿using QuillQuest.DataAccess.Data;
 using QuillQuest.DataAccess.Repository.Interface;
+using QuillQuest.Models.Enums;
 using QuillQuest.Models.Models;
 using System;
 using System.Collections.Generic;
@@ -9,18 +10,19 @@ using System.Threading.Tasks;
 
 namespace QuillQuest.DataAccess.Repository
 {
-    public class OrderheaderRepository : Repository<OrderHeader>, IOrderHeaderRepository
+
+    public class CompanyRepository : Repository<Company>, ICompanyRepository
     {
         private readonly QuillQuestDbContext _dbContext;
 
-        public OrderheaderRepository(QuillQuestDbContext context) : base(context)
+        public CompanyRepository(QuillQuestDbContext context) : base(context)
         {
             _dbContext = context;
         }
 
-        public void Update(OrderHeader orderHeader)
+        public void Update(Company company)
         {
-            _dbContext.OrderHeaders.Update(orderHeader);
+            _dbContext.Companies.Update(company);
         }
     }
 }

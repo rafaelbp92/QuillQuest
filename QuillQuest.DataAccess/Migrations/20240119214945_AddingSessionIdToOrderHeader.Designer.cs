@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QuillQuest.DataAccess.Data;
 
@@ -11,9 +12,11 @@ using QuillQuest.DataAccess.Data;
 namespace QuillQuest.DataAccess.Migrations
 {
     [DbContext(typeof(QuillQuestDbContext))]
-    partial class QuillQuestDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240119214945_AddingSessionIdToOrderHeader")]
+    partial class AddingSessionIdToOrderHeader
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -408,7 +411,7 @@ namespace QuillQuest.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SessionId")
+                    b.Property<string>("SesstionId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ShippingDate")
@@ -481,7 +484,7 @@ namespace QuillQuest.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("b032bfbb-20c4-48b5-b790-c9d36eaffc3b"),
+                            Id = new Guid("56634f6c-75fb-4853-9ec8-ce041425d46b"),
                             Author = "Billy Spark",
                             CategoryId = new Guid("fc591a53-7e51-4c33-b6f4-278de977dd9c"),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
@@ -495,7 +498,7 @@ namespace QuillQuest.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a4f9cf18-12f7-4301-9411-7cbd521caa10"),
+                            Id = new Guid("6fcc13e0-bbed-495c-b3ce-fab90de055ac"),
                             Author = "Nancy Hoover",
                             CategoryId = new Guid("9fa92e4c-d942-4f76-9b0d-7f8334791723"),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
@@ -509,7 +512,7 @@ namespace QuillQuest.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = new Guid("34732b17-8d94-47db-9691-6158a288b140"),
+                            Id = new Guid("10f99ee7-ff5f-4c83-8b60-1c86b05bcbb1"),
                             Author = "Julian Button",
                             CategoryId = new Guid("fc591a53-7e51-4c33-b6f4-278de977dd9c"),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
@@ -523,7 +526,7 @@ namespace QuillQuest.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = new Guid("add4ee45-2c37-464b-a3b8-92e335c61d46"),
+                            Id = new Guid("54769fdc-afd5-4a48-a9c4-53c7d82fc468"),
                             Author = "Abby Muscles",
                             CategoryId = new Guid("9fa92e4c-d942-4f76-9b0d-7f8334791723"),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
@@ -537,7 +540,7 @@ namespace QuillQuest.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = new Guid("087c5912-d826-4eae-b46d-3ee053522609"),
+                            Id = new Guid("36d92d41-281e-490e-ae11-d03e947e37ff"),
                             Author = "Ron Parker",
                             CategoryId = new Guid("f7b462a5-8581-4b90-b009-05c316f0e691"),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
@@ -551,7 +554,7 @@ namespace QuillQuest.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = new Guid("aaa2e16f-3693-4b06-bd7c-6e0d9419f55d"),
+                            Id = new Guid("905439ed-8f56-486d-8c3d-e7e65a0cc6a6"),
                             Author = "Laura Phantom",
                             CategoryId = new Guid("9fa92e4c-d942-4f76-9b0d-7f8334791723"),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
