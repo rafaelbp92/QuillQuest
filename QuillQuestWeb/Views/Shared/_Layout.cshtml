@@ -1,4 +1,17 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+    var cartItemDisplay = "(0)";
+    var sessionCartItemsCount = HttpContextAccessor.HttpContext.Session.GetInt32(SD.SessionCart);
+
+    if (sessionCartItemsCount != null)
+    {
+        cartItemDisplay = $"({sessionCartItemsCount})";
+    }
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -38,13 +51,15 @@
                                     <a class="nav-link" asp-area="Admin" asp-controller="Company" asp-action="Index">Companies</a>
                                 </div>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="Admin" asp-controller="Order" asp-action="Index">Manage Orders</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="Customer" asp-controller="Cart" asp-action="Index"><i class="bi bi-cart"></i>&nbsp; (0)</a>
-                            </li>
-                        }                  
+                        }
+                       
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="Admin" asp-controller="Order" asp-action="Index">Manage Orders</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="Customer" asp-controller="Cart" asp-action="Index"><i class="bi bi-cart"></i>&nbsp; @cartItemDisplay</a>
+                        </li>
+                        
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>

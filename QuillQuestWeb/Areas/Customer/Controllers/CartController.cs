@@ -196,6 +196,8 @@ namespace QuillQuestWeb.Areas.Customer.Controllers
             var cartDb = _unitOfWork.ShoppingCartRepository.Get(c => c.Id == cartId);
             cartDb.Count += 1;
             _unitOfWork.Save();
+            var currentCartSum = _unitOfWork.ShoppingCartRepository.GetAll(c => c.ApplicationUserId == cartDb.ApplicationUserId).Select(c => c.Count).Sum();
+            HttpContext.Session.SetInt32(SD.SessionCart, currentCartSum);
             return RedirectToAction(nameof(Index));
         }
 
@@ -214,6 +216,9 @@ namespace QuillQuestWeb.Areas.Customer.Controllers
             }
             _unitOfWork.Save();
 
+            var currentCartSum = _unitOfWork.ShoppingCartRepository.GetAll(c => c.ApplicationUserId == cartDb.ApplicationUserId).Select(c => c.Count).Sum();
+            HttpContext.Session.SetInt32(SD.SessionCart, currentCartSum);
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -222,6 +227,8 @@ namespace QuillQuestWeb.Areas.Customer.Controllers
             var cartDb = _unitOfWork.ShoppingCartRepository.Get(c => c.Id == cartId);
             _unitOfWork.ShoppingCartRepository.Remove(cartDb);
             _unitOfWork.Save();
+            var currentCartSum = _unitOfWork.ShoppingCartRepository.GetAll(c => c.ApplicationUserId == cartDb.ApplicationUserId).Select(c => c.Count).Sum();
+            HttpContext.Session.SetInt32(SD.SessionCart, currentCartSum);
 
             return RedirectToAction(nameof(Index));
         }

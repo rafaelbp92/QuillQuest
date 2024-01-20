@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using QuillQuest.DataAccess.Repository.Interface;
 using QuillQuest.Models.Models;
+using QuillQuest.Utilities;
 using System.Diagnostics;
 using System.Security.Claims;
 
@@ -22,6 +24,15 @@ namespace QuillQuestWeb.Areas.Customer.Controllers
 
         public IActionResult Index()
         {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+            if (claim.Value != null)
+            {
+                var currentCartSum = _unitOfWork.ShoppingCartRepository.GetAll(c => c.ApplicationUserId == claim.Value).Select(c => c.Count).Sum();
+                HttpContext.Session.SetInt32(SD.SessionCart, currentCartSum);
+            }
+
             IEnumerable<Product> productList = _unitOfWork.ProductRepository.GetAll(includeProperties: "Category");
             return View(productList);
         }
@@ -50,7 +61,7 @@ namespace QuillQuestWeb.Areas.Customer.Controllers
             {
                 // Update cart
                 cartDb.Count += cart.Count;
-                _unitOfWork.ShoppingCartRepository.Update(cartDb);
+                _unitOfWork.ShoppingCartRepository.Update(cartDb);           
             }
             else
             {
@@ -58,9 +69,14 @@ namespace QuillQuestWeb.Areas.Customer.Controllers
                 _unitOfWork.ShoppingCartRepository.Add(cart);
             }
 
+            _unitOfWork.Save();
+
+            var currentCartSum = _unitOfWork.ShoppingCartRepository.GetAll(c => c.ApplicationUserId == userId).Select(c => c.Count).Sum();
+            HttpContext.Session.SetInt32(SD.SessionCart, currentCartSum);
+
             TempData["sucess"] = "Cart updated sucessfully";
            
-            _unitOfWork.Save();
+            
             return RedirectToAction(nameof(Index));
         }
 
