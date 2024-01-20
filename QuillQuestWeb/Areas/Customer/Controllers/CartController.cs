@@ -132,8 +132,8 @@ namespace QuillQuestWeb.Areas.Customer.Controllers
                 var domain = "https://localhost:7181/";
                 var options = new SessionCreateOptions
                 {
-                    SuccessUrl = $"{domain}/customer/cart/OrderConfirmation?{ShoppingCartVm.OrderHeader.Id}",
-                    CancelUrl = $"{domain}/customer/cart/index",
+                    SuccessUrl = $"{domain}customer/cart/OrderConfirmation?id={ShoppingCartVm.OrderHeader.Id}",
+                    CancelUrl = $"{domain}customer/cart/summary",
                     LineItems = new List<SessionLineItemOptions>(),
                     Mode = "payment",
                 };
