@@ -7,13 +7,13 @@ The concepts and libraries used are:
 
 - Entity Framework
 - MVC
-- Repositories pattern
+- Repositories Pattern
 - Unit of Work Pattern
 - Identity
 - Stripe (Payment)
 - Datatables
 - jQuery
-- Boostrap
+- Bootstrap
 - TinyMCE (WYSIWYG HTML editor https://www.tiny.cloud/)
 - Sweet Alert 2 (https://sweetalert2.github.io/)
 
